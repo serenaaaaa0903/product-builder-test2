@@ -70,8 +70,17 @@
             box-shadow: var(--card-shadow);
             border: 1px solid rgba(255,255,255,0.5);
             margin-bottom: 30px;
+            position: relative;
         }
         
+        .setup-preview-btn {
+            position: absolute; top: 20px; right: 20px;
+            background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;
+            padding: 6px 12px; border-radius: 8px; font-size: 0.75rem;
+            cursor: pointer; font-weight: 600; transition: 0.2s;
+        }
+        .setup-preview-btn:hover { background: #e2e8f0; }
+
         .form-group { margin-bottom: 25px; }
         label { display: block; font-weight: 600; margin-bottom: 12px; color: #34495e; font-size: 0.95rem; }
         input, textarea, select { 
@@ -110,7 +119,7 @@
         @keyframes modalUp { from { transform: translateY(80px) scale(0.9); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
         
         .cert-title { font-size: 2.2rem; color: #b8860b; font-weight: 800; margin-bottom: 20px; letter-spacing: 4px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .cert-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 25px; border-bottom: 2px solid #b8860b; display: inline-block; padding: 0 20px; color: #1a202c; }
+        .cert-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 25px; border-bottom: 3px solid #b8860b; display: inline-block; padding: 0 20px; color: #1a202c; }
         .cert-body { font-size: 1rem; line-height: 1.8; margin-bottom: 30px; word-break: keep-all; color: #4a5568; }
         .cert-msg { background: #fffaf0; padding: 15px; border-radius: 12px; border: 1px solid #feebc8; margin-bottom: 30px; font-style: italic; color: #744210; font-weight: 500; font-size: 0.95rem; }
         .cert-footer { font-size: 1.2rem; font-weight: 800; color: #2d3748; }
@@ -145,6 +154,7 @@
 
 <div class="container">
     <section id="setup-section">
+        <button id="btn-setup-preview" class="setup-preview-btn" onclick="previewOnSetup()">메시지 미리보기</button>
         <h2 id="txt-setup-h2">1. 교육 대상 설정</h2>
         <div class="form-group">
             <label id="txt-label-target">누구에게 보낼까요?</label>
@@ -164,7 +174,7 @@
         </div>
         <button class="btn-main" id="txt-btn-generate" onclick="generateLink()">교육 링크 생성</button>
 
-        <div id="link-display">
+        <div id="link-display" style="display:none;">
             <p id="txt-link-ready" style="font-weight:bold; color:var(--primary); margin-bottom: 5px;">링크가 준비되었습니다!</p>
             <p id="txt-link-instruct" style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">교육링크 클릭 후 생성된 코드를 문자/이메일을 통해 전달하세요</p>
             <button class="btn-main" style="background:#fee500; color:#3c1e1e;" id="txt-btn-copy" onclick="copyUrl()">링크 복사 후 카톡 전송</button>
@@ -227,11 +237,7 @@
             readAloud: "🔊 분석 내용 읽어주기",
             ttsLang: "ko-KR",
             btnSave: "이미지 저장", btnClose: "닫기",
-            eduList: [
-                { id: 1, title: "[분석] 2026년 대한민국 사기 트렌드 요약", content: "2026년 한국의 사기 트렌드는 '초정밀 하이브리드화'입니다. AI 딥페이크로 목소리와 얼굴을 똑같이 흉내 낸 가족 사칭 사기가 주를 이룹니다. 특히 '로맨스 스캠'과 '투자 사기'가 결합되어 피해자의 심리와 자산을 동시에 공략하는 정교한 수법이 기승을 부리고 있으니 각별한 주의가 필요합니다. 모르는 링크나 과도한 수익 약속은 무조건 의심하십시오.", date: "2026.01.01" },
-                { id: 2, title: "[유튜브] 2026년형 보이스피싱 신종 수법과 돈 돌려받는 법", url: "https://www.youtube.com/results?search_query=2026년+보이스피싱+신종수법", date: "2026.01.10" },
-                { id: 3, title: "[유튜브] [속보] 법무부, '120억 로맨스 스캠 부부' 송환 요청", url: "https://www.youtube.com/results?search_query=120억+로맨스+스캠+부부+송환", date: "2024.03.15" }
-            ]
+            setupPreview: "메시지 미리보기"
         },
         en: {
             title: "🛡️ Family Safety Sheriff", subtitle: "Customized Education for Your Loved Ones",
@@ -254,39 +260,49 @@
             readAloud: "🔊 Read Aloud",
             ttsLang: "en-US",
             btnSave: "Save Image", btnClose: "Close",
-            eduList: [
-                { id: 1, title: "[Analysis] 2026 Global Fraud Trends", content: "The 2026 fraud landscape is dominated by AI-driven technologies. 'Voice Cloning' allows scammers to replicate voices with seconds of audio, while 'Deepfake FaceTime' makes impersonation incredibly convincing. Celebrity-impersonated Love Scams and fake investment portals are also at an all-time high.", date: "2026.01.01" },
-                { id: 2, title: "[YouTube] THESE 5 Scams Are EXPLODING in 2026", url: "https://www.youtube.com/results?search_query=Rossen+Reports+Scams+2026", date: "2026.01.05" },
-                { id: 3, title: "[YouTube] The Call That Sounds Like Your Kid (But Isn't)", url: "https://www.youtube.com/results?search_query=AI+voice+cloning+scam+protection", date: "2025.11.20" }
-            ]
+            setupPreview: "Message Preview"
         },
         ja: {
             title: "🛡️ 我が家の安全保安官", subtitle: "大切な家族のための防범 education",
-            setupH2: "1. 教育대상 設定", labelTarget: "誰に送りますか？", optParent: "ご両親へ", optChild: "お子様へ", optSpouse: "配偶者へ",
+            setupH2: "1. 교육대상 설정", labelTarget: "誰に送りますか？", optParent: "ご両親へ", optChild: "お子様へ", optSpouse: "配偶者へ",
             labelName: "お名前", labelMsg: "愛のメッセージ", btnGenerate: "教育링크를 작성",
-            placeholderName: "名前を入力してください", placeholderMsg: "詐欺에遭わず、幸せ에暮라!",
+            placeholderName: "名前を入力してください", placeholderMsg: "詐欺에遭わず, 幸せに暮らそう!",
             linkReady: "링크가 준비되었습니다!", btnCopy: "コピーして送信",
-            linkInstruct: "リンクをクリックした後, 生成されたURLをメールなどで送信してください",
-            eduWelcome: "安全保安官様、ようこそ！", 
-            eduDesc: "本教育は毎月の新型詐欺トレンド를分析し, 教育することを目的としています. 以下の教育を完了してください.", 
+            linkInstruct: "링크를 클릭한 후, 생성된 URL을 이메일 등으로 전송해 주세요.",
+            eduWelcome: "安全保安官様, ようこそ!", 
+            eduDesc: "本教育は毎月の新型詐欺トレンド를分析し, 교육을 목적으로 하고 있습니다. 以下の교육을 완료해 주세요.", 
             progress: "進捗",
             certTitle: "修 了 証", 
-            certBody: "上記の安全保安官は, 家族が丹精込めて準備した防犯教育課程を誠実に修了したため, 本証を授与します.",
+            certBody: "上記の安全保安官は, 家族가丹精込めて準備した防犯教育課程을誠実に修了したため, 本証을授与します.",
             certFooter: "我が家の安全保安官本部",
             certSuffix: "安全保安官様",
             eduBtn: "内容を見る", alertLink: "링크를 복사했습니다!",
-            previewBtn: "👀 修了証のプレビュー",
+            previewBtn: "👀 修了証のプレ뷰",
             issueBtn: "🏆 修了証（上状）を確認",
             trendConfirm: "確認済み",
             readAloud: "🔊 内容を読み上げる",
             ttsLang: "ja-JP",
             btnSave: "画像を保存", btnClose: "閉じる",
-            eduList: [
-                { id: 1, title: "[分析] 2026년 日本の詐欺トレンド", content: "2026年の日本では, SNSを通じた投資勧誘とロマンス詐欺가高度に融合한手法가급증しています. 犯人は長い時間をかけて信頼관계를築기, 巧妙な偽의投資プラットフォームへの誘導도확인されています.", date: "2026.01.01" },
-                { id: 2, title: "[뉴스] SNS詐欺対策、SIM本人確認義務づけ", url: "https://www.nikkei.com/article/DGXZQOUA123450S4A310C2000000/", date: "2024.03.12" },
-                { id: 3, title: "[YouTube] あなた에会いに日本に行きます (投資詐欺)", url: "https://www.youtube.com/results?search_query=ロマンス詐欺+2400万円+被害", date: "2024.02.20" }
-            ]
+            setupPreview: "メッセージプレビュー"
         }
+    };
+
+    const eduDataPerLang = {
+        ko: [
+            { id: 1, title: "[분석] 2026년 대한민국 사기 트렌드 요약", content: "2026년 한국의 사기 트렌드는 '초정밀 하이브리드화'입니다. AI 딥페이크로 목소리와 얼굴을 똑같이 흉내 낸 가족 사칭 사기가 주를 이룹니다. 특히 '로맨스 스캠'과 '투자 사기'가 결합되어 피해자의 심리와 자산을 동시에 공략하는 정교한 수법이 기승을 부리고 있으니 각별한 주의가 필요합니다. 모르는 링크나 과도한 수익 약속은 무조건 의심하십시오.", date: "2026.01.01" },
+            { id: 2, title: "[유튜브] 2026년형 보이스피싱 신종 수법과 돈 돌려받는 법", url: "https://www.youtube.com/results?search_query=2026년+보이스피싱+신종수법", date: "2026.01.10" },
+            { id: 3, title: "[유튜브] [속보] 법무부, '120억 로맨스 스캠 부부' 송환 요청", url: "https://www.youtube.com/results?search_query=120억+로맨스+스캠+부부+송환", date: "2024.03.15" }
+        ],
+        en: [
+            { id: 1, title: "[Analysis] 2026 Global Fraud Trends", content: "The 2026 fraud landscape is dominated by AI-driven technologies. 'Voice Cloning' allows scammers to replicate voices with seconds of audio, while 'Deepfake FaceTime' makes impersonation incredibly convincing. Celebrity-impersonated Love Scams and fake investment portals are also at an all-time high. Never share codes or personal data.", date: "2026.01.01" },
+            { id: 2, title: "[YouTube] THESE 5 Scams Are EXPLODING in 2026", url: "https://www.youtube.com/results?search_query=Rossen+Reports+Scams+2026", date: "2026.01.05" },
+            { id: 3, title: "[YouTube] The Call That Sounds Like Your Kid (But Isn't)", url: "https://www.youtube.com/results?search_query=AI+voice+cloning+scam+protection", date: "2025.11.20" }
+        ],
+        ja: [
+            { id: 1, title: "[分析] 2026년 日本の詐欺トレンド", content: "2026年の日本では, SNSを通じた投資勧誘とロマンス詐欺가高度에 융합된 수법이 급증하고 있습니다. 범인은 긴 시간을 들여 신뢰 관계를 쌓고, 교묘한 가짜 투자 플랫폼으로 유도합니다. AI를 이용한 '사칭' 전화에도 주의가 필요합니다.", date: "2026.01.01" },
+            { id: 2, title: "[뉴스] SNS詐欺対策、SIM本人確認義務づけ", url: "https://www.nikkei.com/article/DGXZQOUA123450S4A310C2000000/", date: "2024.03.12" },
+            { id: 3, title: "[YouTube] あなた에会いに日本に行きます (投資詐欺)", url: "https://www.youtube.com/results?search_query=ロマンス詐欺+2400万円+被害", date: "2024.02.20" }
+        ]
     };
 
     let currentLang = 'ko';
@@ -315,6 +331,7 @@
         document.getElementById('txt-title').innerText = d.title;
         document.getElementById('txt-subtitle').innerText = d.subtitle;
         document.getElementById('txt-setup-h2').innerText = d.setupH2;
+        document.getElementById('btn-setup-preview').innerText = d.setupPreview;
         document.getElementById('txt-label-target').innerText = d.labelTarget;
         document.getElementById('txt-opt-parent').innerText = d.optParent;
         document.getElementById('txt-opt-child').innerText = d.optChild;
@@ -339,6 +356,22 @@
         if(document.getElementById('edu-section').style.display === 'block') renderList();
     }
 
+    function previewOnSetup() {
+        const name = document.getElementById('p_name').value;
+        const msg = document.getElementById('p_msg').value;
+        if(!name || !msg) return alert(currentLang === 'ko' ? "이름과 메시지를 먼저 입력해주세요." : "Please enter name and message first.");
+        
+        const d = langData[currentLang];
+        document.getElementById('cert-ui-title').innerText = d.certTitle;
+        document.getElementById('cert-ui-name').innerText = name;
+        document.getElementById('cert-ui-suffix').innerText = d.certSuffix;
+        document.getElementById('cert-ui-body').innerText = d.certBody;
+        document.getElementById('cert-ui-msg').innerText = msg;
+        document.getElementById('cert-ui-footer').innerText = d.certFooter;
+        document.getElementById('cert-ui-date').innerText = new Date().toLocaleDateString();
+        document.getElementById('cert-modal').style.display = 'flex';
+    }
+
     function generateLink() {
         const target = document.getElementById('target_type').value;
         const name = document.getElementById('p_name').value;
@@ -358,7 +391,8 @@
         const list = document.getElementById('edu-list');
         list.innerHTML = '';
         const d = langData[currentLang];
-        d.eduList.forEach((item) => {
+        const eduList = eduDataPerLang[currentLang];
+        eduList.forEach((item) => {
             const isDone = localStorage.getItem(`done_${item.id}`);
             const div = document.createElement('div');
             div.className = `edu-card ${isDone ? 'done' : ''}`;
@@ -395,11 +429,11 @@
 
     function updateStatus() {
         let count = 0;
-        const d = langData[currentLang];
-        d.eduList.forEach(i => { if(localStorage.getItem(`done_${i.id}`)) count++; });
-        const total = d.eduList.length;
+        const eduList = eduDataPerLang[currentLang];
+        eduList.forEach(i => { if(localStorage.getItem(`done_${i.id}`)) count++; });
+        const total = eduList.length;
         document.getElementById('progress-fill').style.width = (count/total*100) + '%';
-        document.getElementById('txt-progress').innerText = `${d.progress}: ${count} / ${total}`;
+        document.getElementById('txt-progress').innerText = `${langData[currentLang].progress}: ${count} / ${total}`;
         if(count >= total) document.getElementById('completion-buttons').style.display = 'flex';
     }
 

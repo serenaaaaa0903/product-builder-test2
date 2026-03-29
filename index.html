@@ -165,7 +165,8 @@
         <button class="btn-main" id="txt-btn-generate" onclick="generateLink()">교육 링크 생성</button>
 
         <div id="link-display">
-            <p id="txt-link-ready" style="font-weight:bold; color:var(--primary);">링크가 준비되었습니다!</p>
+            <p id="txt-link-ready" style="font-weight:bold; color:var(--primary); margin-bottom: 5px;">링크가 준비되었습니다!</p>
+            <p id="txt-link-instruct" style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">교육링크 클릭 후 생성된 코드를 문자/이메일을 통해 전달하세요</p>
             <button class="btn-main" style="background:#fee500; color:#3c1e1e;" id="txt-btn-copy" onclick="copyUrl()">링크 복사 후 카톡 전송</button>
             <p id="final-url" style="font-size:0.75rem; color:#888; word-break:break-all; margin-top:10px;"></p>
         </div>
@@ -181,7 +182,10 @@
             <p id="txt-progress" style="font-weight: 800; color: var(--primary);"></p>
         </div>
         <div id="edu-list"></div>
-        <button id="issue-btn" class="btn-main" style="display:none; background:var(--accent); color: #4e342e;" onclick="showFancyCert()">🏆 교육 이수 상장 확인</button>
+        <div id="completion-buttons" style="display:none; flex-direction: column; gap: 10px;">
+            <button id="preview-btn" class="btn-main" style="background:var(--accent); color: #4e342e; margin-top: 0;" onclick="showFancyCert()">👀 수료증 미리보기</button>
+            <button id="issue-btn" class="btn-main" style="background:var(--accent); color: #4e342e; margin-top: 0;" onclick="showFancyCert()">🏆 교육 이수 상장 확인</button>
+        </div>
     </section>
 </div>
 
@@ -208,6 +212,7 @@
             labelName: "받는 분 성함", labelMsg: "사랑의 메시지", btnGenerate: "교육 링크 생성",
             placeholderName: "성함을 입력하세요", placeholderMsg: "사기 당하지 말고 행복하게 살자!",
             linkReady: "링크가 준비되었습니다!", btnCopy: "링크 복사 후 카톡 전송",
+            linkInstruct: "교육링크 클릭 후 생성된 코드를 문자/이메일을 통해 전달하세요",
             eduWelcome: "안전보안관님 환영합니다!", 
             eduDesc: "본 교육은 매달 신종사기 트랜드를 분석하고 교육을 목적으로 하고 있습니다. 아래 교육을 완료해 주세요.", 
             progress: "진행도",
@@ -216,6 +221,7 @@
             certFooter: "우리집 안전 보안관 본부",
             certSuffix: "안전 보안관님",
             eduBtn: "내용 확인하기", alertLink: "링크가 복사되었습니다!",
+            previewBtn: "👀 수료증 미리보기",
             issueBtn: "🏆 교육 이수 상장 확인",
             trendConfirm: "분석 내용 확인 완료",
             readAloud: "🔊 분석 내용 읽어주기",
@@ -233,6 +239,7 @@
             labelName: "Recipient Name", labelMsg: "Message of Love", btnGenerate: "Create Education Link",
             placeholderName: "Enter name", placeholderMsg: "Stay safe and be happy!",
             linkReady: "Link is Ready!", btnCopy: "Copy Link & Send",
+            linkInstruct: "After clicking the link, share the generated URL via SMS or Email",
             eduWelcome: "Safety Sheriff, Welcome!", 
             eduDesc: "This course analyzes monthly new fraud trends for educational purposes. Please complete the missions below.", 
             progress: "Progress",
@@ -241,6 +248,7 @@
             certFooter: "Family Safety Sheriff HQ",
             certSuffix: "Safety Sheriff",
             eduBtn: "View Content", alertLink: "Link copied to clipboard!",
+            previewBtn: "👀 Certificate Preview",
             issueBtn: "🏆 View Completion Certificate",
             trendConfirm: "Confirmed",
             readAloud: "🔊 Read Aloud",
@@ -256,8 +264,9 @@
             title: "🛡️ 我が家の安全保安官", subtitle: "大切な家族のための防범 education",
             setupH2: "1. 教育대상 設定", labelTarget: "誰に送りますか？", optParent: "ご両親へ", optChild: "お子様へ", optSpouse: "配偶者へ",
             labelName: "お名前", labelMsg: "愛のメッセージ", btnGenerate: "教育링크를 작성",
-            placeholderName: "名前を入力してください", placeholderMsg: "詐欺에遭わず、幸せ에暮らそう！",
+            placeholderName: "名前を入力してください", placeholderMsg: "詐欺에遭わず、幸せ에暮라!",
             linkReady: "링크가 준비되었습니다!", btnCopy: "コピーして送信",
+            linkInstruct: "リンクをクリックした後, 生成されたURLをメールなどで送信してください",
             eduWelcome: "安全保安官様、ようこそ！", 
             eduDesc: "本教育は毎月の新型詐欺トレンド를分析し, 教育することを目的としています. 以下の教育を完了してください.", 
             progress: "進捗",
@@ -266,6 +275,7 @@
             certFooter: "我が家の安全保安官本部",
             certSuffix: "安全保安官様",
             eduBtn: "内容を見る", alertLink: "링크를 복사했습니다!",
+            previewBtn: "👀 修了証のプレビュー",
             issueBtn: "🏆 修了証（上状）を確認",
             trendConfirm: "確認済み",
             readAloud: "🔊 内容を読み上げる",
@@ -315,8 +325,10 @@
         document.getElementById('p_msg').placeholder = d.placeholderMsg;
         document.getElementById('txt-btn-generate').innerText = d.btnGenerate;
         document.getElementById('txt-link-ready').innerText = d.linkReady;
+        document.getElementById('txt-link-instruct').innerText = d.linkInstruct;
         document.getElementById('txt-btn-copy').innerText = d.btnCopy;
         document.getElementById('txt-edu-desc').innerText = d.eduDesc;
+        document.getElementById('preview-btn').innerText = d.previewBtn;
         document.getElementById('issue-btn').innerText = d.issueBtn;
         document.getElementById('btn-save-ui').innerText = d.btnSave;
         document.getElementById('btn-close-ui').innerText = d.btnClose;
@@ -388,7 +400,7 @@
         const total = d.eduList.length;
         document.getElementById('progress-fill').style.width = (count/total*100) + '%';
         document.getElementById('txt-progress').innerText = `${d.progress}: ${count} / ${total}`;
-        if(count >= total) document.getElementById('issue-btn').style.display = 'block';
+        if(count >= total) document.getElementById('completion-buttons').style.display = 'flex';
     }
 
     function showFancyCert() {
